@@ -1,0 +1,86 @@
+html{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    font-weight: 500;
+    background-color: #68B2A0;
+    color: white;
+}
+
+a{
+    display: block;
+    text-decoration: none !important;
+    color: #1aafeb;
+    margin: 10px;
+}
+
+.center{
+    text-align: center;
+}
+
+h1,h2{
+    text-align: center;
+}
+
+.scene{
+    margin-bottom: 100px;
+}
+
+.last{
+    margin-bottom: 0;
+}
+
+body{
+    padding-left: 20px;
+}
+
+char{
+    font-weight: 600;
+    font-style: italic;
+}
+
+.aqua{
+    color: aqua;
+}
+
+.burlywood{
+    color: burlywood;
+}
+
+.deeppink{
+    color: deeppink;
+}
+
+.darkorange{
+    color: darkorange;
+}
+
+.limegreen{
+    color: limegreen;
+}
+
+.peru{
+    color: peru;
+}
+.red{
+    color: crimson;
+}
+.purple{
+    color: darkviolet;
+}
+.darkblue{
+    color: #384E78;
+
+}
+.darkpink{
+    color: #9F8189;
+}
+.darkolivegreen{
+    color:darkolivegreen;
+}
+.heading{
+    color: maroon;
+}
+.heading1{
+    color: rebeccapurple;
+}
+
