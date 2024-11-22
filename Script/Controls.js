@@ -4,7 +4,7 @@ audioStartsAt("TBN", 2);
 
 audioStartsAt("Trong", 1);
 
-audioStartsAt("AP", 66);
+audioStartsAt("AP", 55);
 
 
 
