@@ -60,3 +60,70 @@ function giamDan(audioID, start = 1, end = 0, smooth = 0.1, deltaSmooth = 0.5){
         }
     });
 }
+
+function giamTangDan(
+    audioID,
+    start = 1,
+    end = 0,
+    smooth = 0.1,
+    deltaSmooth = 0.5,
+    startDecreaseTime = 5,
+    startIncreaseTime = 10
+) {
+    let audio = document.getElementById(audioID);
+    audio.volume = start;
+
+    audio.addEventListener("play", async () => {
+        // Đợi đến thời điểm bắt đầu giảm dần
+        await sleep(startDecreaseTime * 1000);
+
+        // Giai đoạn giảm dần
+        while (audio.volume > end) {
+            await sleep(deltaSmooth * 1000);
+            audio.volume = Math.max(end, audio.volume - smooth);
+        }
+
+        // Đợi đến thời điểm bắt đầu tăng dần
+        const delayBeforeIncrease = Math.max(0, startIncreaseTime * 1000 - startDecreaseTime * 1000);
+        await sleep(delayBeforeIncrease);
+
+        // Giai đoạn tăng dần
+        while (audio.volume < start) {
+            await sleep(deltaSmooth * 1000);
+            audio.volume = Math.min(start, audio.volume + smooth);
+        }
+    });
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function giamDanDenGiay(audioID, start = 1, end = 0, smooth = 0.1, deltaSmooth = 0.5, startSecond = 0) {
+    let audio = document.getElementById(audioID);
+    audio.volume = start;
+
+    // Hàm sleep giúp chờ đợi trong khoảng thời gian
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Hàm giảm âm lượng
+    async function startVolumeReduction() {
+        while (audio.volume > end) {
+            await sleep(deltaSmooth * 1000); // Chờ deltaSmooth giây
+            audio.volume = Math.max(audio.volume - smooth, end); // Giảm âm lượng dần nhưng không nhỏ hơn 'end'
+        }
+    }
+
+    // Hàm xử lý sự kiện
+    function onTimeUpdate() {
+        if (audio.currentTime >= startSecond && audio.volume > end) {
+            audio.removeEventListener("timeupdate", onTimeUpdate); // Ngừng lắng nghe để tránh trùng lặp
+            startVolumeReduction(); // Bắt đầu giảm âm lượng
+        }
+    }
+
+    // Thêm sự kiện timeupdate
+    audio.addEventListener("timeupdate", onTimeUpdate);
+}
